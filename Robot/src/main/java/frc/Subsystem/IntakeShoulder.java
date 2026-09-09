@@ -14,39 +14,23 @@ import frc.robot.Constants;
 public class IntakeShoulder extends SubsystemBase {
   private TalonFX shoulder;
 
-  
-
-
-
   /** Creates a new IntakeShould. */
   public IntakeShoulder() {
     shoulder = new TalonFX(Constants.INTAKE_CONSTANTS.SHOULDER_INTAKE_MOTOR);
-    
-  
   }
   
   public Command setSpeed(double speed){
-        return new RunCommand(() -> shoulder.set(speed),this);
+    return new RunCommand(() -> shoulder.set(speed),this);
   }
   
   public Command setPosition(double ticks){
-        return new RunCommand(() -> shoulder.setPosition(ticks),this);
-
-  
+    return new RunCommand(() -> shoulder.setPosition(ticks),this);
   }
 
-  
-  
-
-  
- 
-
-  
-
-
-  // public void goToTarget(int target) {
+  // public void goToTargeta(int target) {
   //   shoulder.setPosition(target);
   // }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

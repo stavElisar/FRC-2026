@@ -4,9 +4,6 @@
 
 package frc.robot;
 
-import static edu.wpi.first.units.Units.Degrees;
-
-import edu.wpi.first.units.measure.Power;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -41,12 +38,11 @@ public class RobotContainer {
     indexer.setDefaultCommand(indexer.setAllIndexer(0));
     hood.setDefaultCommand(hood.setAllHoods(0));
     configureBindings();
-
   }
 
 
   private void configureBindings() {
-    new JoystickButton(joystick, 1).whileTrue(intake.spintake(1));
+    new JoystickButton(joystick, 1).whileTrue(intake.spin(1));
 
     new JoystickButton(joystick, 2).whileTrue(intakeShoulder.setPosition(Constants.INTAKE_CONSTANTS.OPEN_POSE));
     new JoystickButton(joystick, 3).whileTrue(intakeShoulder.setPosition(Constants.INTAKE_CONSTANTS.CLOSE_POSE));

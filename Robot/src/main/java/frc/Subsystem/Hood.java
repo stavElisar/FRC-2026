@@ -4,8 +4,6 @@ import static edu.wpi.first.units.Units.Degrees;
 
 import com.ctre.phoenix6.hardware.TalonFX;
 
-import edu.wpi.first.units.measure.Angle;
-import edu.wpi.first.units.measure.AngularAcceleration;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -15,8 +13,6 @@ import frc.robot.Constants;
 public class Hood extends SubsystemBase {
     private TalonFX rightHood; 
     private TalonFX leftHood;
-
-
 
     public Hood() {
         rightHood = new TalonFX(Constants.HOOD_CONSTANTS.HOOD_RIGHT_ANGLE);
@@ -35,7 +31,7 @@ public class Hood extends SubsystemBase {
         return new ParallelCommandGroup(
             setLeftHood(angle),
             setRightHood(angle)
-
-    );}
+        );
+    }
 }
 

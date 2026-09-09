@@ -2,9 +2,6 @@ package frc.Subsystem;
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
-
-
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.MotorAlignmentValue;
@@ -16,20 +13,19 @@ import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
 
-  private TalonFX mastake;
-  private TalonFX inslave; 
+  private TalonFX master;
+  private TalonFX slave; 
   
   /** Creates a new Intake. */
   public Intake() {
-    mastake = new TalonFX(Constants.INTAKE_CONSTANTS.MASTER_INTAKE_MOTOR);
-    inslave = new TalonFX(Constants.INTAKE_CONSTANTS.SLAVE_INTAKE_MOTOR);
+    master = new TalonFX(Constants.INTAKE_CONSTANTS.MASTER_INTAKE_MOTOR);
+    slave = new TalonFX(Constants.INTAKE_CONSTANTS.SLAVE_INTAKE_MOTOR);
 
-    inslave.setControl(new Follower(mastake.getDeviceID(), MotorAlignmentValue.Opposed));
+    slave.setControl(new Follower(master.getDeviceID(), MotorAlignmentValue.Opposed));
   }
  
-  public Command spintake(double power) {
-    return new RunCommand(() -> mastake.set(power), this);
-
+  public Command spin(double power) {
+    return new RunCommand(() -> master.set(power), this);
   }
 
   @Override

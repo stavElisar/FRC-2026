@@ -30,6 +30,5 @@ public final class Constants {
     public static final class HOOD_CONSTANTS{
         public static final int HOOD_LEFT_ANGLE = 16;
         public static final int HOOD_RIGHT_ANGLE = 10;
-    }
-    
+    }   
 }
