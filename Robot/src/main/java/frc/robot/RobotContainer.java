@@ -4,23 +4,27 @@
 
 package frc.robot;
 
+import static edu.wpi.first.units.Units.Degrees;
+
 import edu.wpi.first.units.measure.Power;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.Subsystem.Hood;
 import frc.Subsystem.Indexer;
 import frc.Subsystem.Intake;
 import frc.Subsystem.IntakeShoulder;
 import frc.Subsystem.Shooter;
 
 public class RobotContainer {
-  Intake intake; 
-  PS4Controller joystick;
   IntakeShoulder intakeShoulder;
+  PS4Controller joystick;
   Indexer indexer;
   Shooter shooter;
+  Intake intake; 
+  Hood hood; 
   
 
   public RobotContainer() {
@@ -30,10 +34,12 @@ public class RobotContainer {
     indexer = new Indexer();
     shooter = new Shooter();
     intake = new Intake();
+    hood = new Hood();
 
     intakeShoulder.setDefaultCommand(intakeShoulder.setPosition(Constants.INTAKE_CONSTANTS.OPEN_POSE));
     shooter.setDefaultCommand(shooter.setAllShooter(0));
     indexer.setDefaultCommand(indexer.setAllIndexer(0));
+    hood.setDefaultCommand(hood.setAllHoods(0));
     configureBindings();
 
   }
@@ -48,17 +54,10 @@ public class RobotContainer {
     new JoystickButton(joystick, 4).whileTrue(indexer.setAllIndexer(0.5));
 
     new JoystickButton(joystick, 5).whileTrue(shooter.setAllShooter(1));
-   
-   
 
-
-
-    
-
-
+    new JoystickButton(joystick, 6).whileTrue(hood.setAllHoods(15));
     // new JoystickButton(joystick, 5).whileTrue(indexer.runRoller(Constants.INDEXER_CONSTANTS.INDEXER_MOTOR_ROLLER));
     // new JoystickButton(joystick, 6).whileTrue(indexer.runUpper(Constants.INDEXER_CONSTANTS.INDEXER_MOTOR_UPPER));
-    
   }
 
   public Command getAutonomousacCommand() {

@@ -7,18 +7,17 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class Indexer extends SubsystemBase {
-
-   private TalonFX dorito; 
+    private TalonFX dorito; 
     private TalonFX roller;
     private TalonFX upper; 
  
-   
     public Indexer() {
-        dorito = new TalonFX(13);
-        roller = new TalonFX(18);
-        upper = new TalonFX(17);
+        dorito = new TalonFX(Constants.INDEXER_CONSTANTS.INDEXER_MOTOR_DORITO);
+        roller = new TalonFX(Constants.INDEXER_CONSTANTS.INDEXER_MOTOR_ROLLER);
+        upper = new TalonFX(Constants.INDEXER_CONSTANTS.INDEXER_MOTOR_UPPER);
 
     }
 
@@ -41,8 +40,6 @@ public class Indexer extends SubsystemBase {
             new RunCommand(() -> upper.set(power)),
             new RunCommand(() -> roller.set(power))
         );
-    }
-
-    
+    }   
 
 }

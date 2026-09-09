@@ -12,6 +12,7 @@ import com.ctre.phoenix6.signals.MotorAlignmentValue;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
 
@@ -20,13 +21,12 @@ public class Intake extends SubsystemBase {
   
   /** Creates a new Intake. */
   public Intake() {
-    mastake = new TalonFX(25);
-    inslave = new TalonFX(23);
+    mastake = new TalonFX(Constants.INTAKE_CONSTANTS.MASTER_INTAKE_MOTOR);
+    inslave = new TalonFX(Constants.INTAKE_CONSTANTS.SLAVE_INTAKE_MOTOR);
 
     inslave.setControl(new Follower(mastake.getDeviceID(), MotorAlignmentValue.Opposed));
   }
  
-  
   public Command spintake(double power) {
     return new RunCommand(() -> mastake.set(power), this);
 

@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase{
     private TalonFX RightMaster;
@@ -16,22 +17,16 @@ public class Shooter extends SubsystemBase{
     private TalonFX LeftMaster;
     private TalonFX LeftSlave;
 
-
-
-
     public Shooter() {
-        RightMaster = new TalonFX(14);
-        RightSlave = new TalonFX(15);
+        RightMaster = new TalonFX(Constants.SHOOTER_CONSTANTS.SHOOTER_RIGHT_MASTER);
+        RightSlave = new TalonFX(Constants.SHOOTER_CONSTANTS.SHOOTER_RIGHT_SLAVE);
 
-        LeftMaster = new TalonFX(12);
-        LeftSlave = new TalonFX(11);
+        LeftMaster = new TalonFX(Constants.SHOOTER_CONSTANTS.SHOOTER_LEFT_MASTER);
+        LeftSlave = new TalonFX(Constants.SHOOTER_CONSTANTS.SHOOTER_LEFT_SLAVE);
 
         RightSlave.setControl(new Follower(RightMaster.getDeviceID(), MotorAlignmentValue.Opposed));
         LeftSlave.setControl(new Follower(LeftMaster.getDeviceID(), MotorAlignmentValue.Opposed));
-
-
-    
-}
+    }
 
     public Command leftMaster( double speed) {
         return new RunCommand(() -> RightMaster.set(speed), this);
@@ -41,13 +36,11 @@ public class Shooter extends SubsystemBase{
         return new RunCommand(() -> LeftMaster.set(speed), this);
     }
 
-
     public Command setAllShooter(double speed) {
         return run(() -> {
             RightMaster.set(speed);
             LeftMaster.set(speed);
         });
-
-    }
+     }
 }
 
