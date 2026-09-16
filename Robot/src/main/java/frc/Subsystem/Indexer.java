@@ -1,5 +1,7 @@
 package frc.Subsystem;
 
+import java.lang.management.ThreadInfo;
+
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.Command;
@@ -20,22 +22,22 @@ public class Indexer extends SubsystemBase {
     }
 
     public Command runDorito(double power) {
-        return new RunCommand(() -> dorito.set(power), this);
+        return new RunCommand(() -> dorito.set(power),this);
     }
 
     public Command runRoller(double power) {
-        return new RunCommand(() -> roller.set(power), this);
+        return new RunCommand(() -> roller.set(power),this);
     }
 
     public Command runUpper(double power) {
-        return new RunCommand(() -> upper.set(power), this);
+        return new RunCommand(() -> upper.set(power),this);
     }
 
     public Command setAllIndexer(double power) {
-        return new ParallelCommandGroup(
-            new RunCommand(() -> dorito.set(power)),
-            new RunCommand(() -> upper.set(power)),
-            new RunCommand(() -> roller.set(power))
-        );
+    return this.run(() -> {
+        dorito.set(power);
+        upper.set(power);
+        roller.set(power);
+        });
     }   
 }

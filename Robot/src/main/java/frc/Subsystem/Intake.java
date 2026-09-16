@@ -25,7 +25,7 @@ public class Intake extends SubsystemBase {
   }
  
   public Command spin(double power) {
-    return new RunCommand(() -> master.set(power), this);
+    return new RunCommand(() -> master.set(power),this);
   }
 
   @Override

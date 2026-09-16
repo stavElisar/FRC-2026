@@ -2,8 +2,11 @@ package frc.Subsystem;
 
 import static edu.wpi.first.units.Units.Degrees;
 
+import org.littletonrobotics.junction.Logger;
+
 import com.ctre.phoenix6.hardware.TalonFX;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -20,18 +23,23 @@ public class Hood extends SubsystemBase {
     }
 
     public Command setRightHood(int angle) {
-        return new RunCommand(() -> rightHood.setPosition(Degrees.of(angle)),this);
+        return new RunCommand(() -> rightHood.setPosition(Degrees.of(angle)));
     }
 
     public Command setLeftHood(int angle) {
-        return new RunCommand(() -> leftHood.setPosition(Degrees.of(angle)),this);
+        return new RunCommand(() -> leftHood.setPosition(Degrees.of(angle)));
     }
 
-    public Command setAllHoods(int angle){
-        return new ParallelCommandGroup(
-            setLeftHood(angle),
-            setRightHood(angle)
-        );
+   public Command setAllHoods(int angle) {
+        return this.run(() -> {
+            rightHood.setPosition(Degrees.of(angle));
+            leftHood.setPosition(Degrees.of(angle));
+        });
     }
+   @Override
+    public void periodic() {
+    Logger.recordOutput("Hood/powerLeftMotor", leftHood.getSupplyCurrent().getValueAsDouble());
+    Logger.recordOutput("Hood/powerRightMotor", rightHood.getSupplyCurrent().getValueAsDouble());
+}
 }
 

@@ -20,7 +20,7 @@ public class RobotContainer {
   PS4Controller joystick;
   Indexer indexer;
   Shooter shooter;
-  Intake intake; 
+  Intake intake;
   Hood hood; 
   
 
@@ -57,6 +57,6 @@ public class RobotContainer {
   }
 
   public Command getAutonomousacCommand() {
-    return Commands.print("No autonomous command configured");
-  }
+  return Commands.print("No autonomous command configured");
+}
 }
